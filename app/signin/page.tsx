@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 interface pageProps {}
-const page: React.FC<pageProps> = () => {
+const Page: React.FC<pageProps> = () => {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -85,7 +85,7 @@ const page: React.FC<pageProps> = () => {
                 Sign in
               </button>
               <p className="text-sm font-light text-gray-500 ">
-                Don't have an account yet?{" "}
+                Don&rsquo;t have an account yet?
                 <Link
                   href="/register"
                   className="font-medium text-blue-600 hover:underline "
@@ -100,4 +100,4 @@ const page: React.FC<pageProps> = () => {
     </section>
   );
 };
-export default page;
+export default Page

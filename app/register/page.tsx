@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 interface pageProps {}
-const page: React.FC<pageProps> = () => {
+const Page: React.FC<pageProps> = () => {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -108,4 +108,4 @@ const page: React.FC<pageProps> = () => {
     </section>
   );
 };
-export default page;
+export default Page

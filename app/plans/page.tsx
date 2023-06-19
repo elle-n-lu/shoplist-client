@@ -16,7 +16,7 @@ export type plans = {
 // type planProps = {
 //   plans: plans[];
 // };
-const page: React.FC = () => {
+const Page: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [plans, setPlans] = useState<plans[]>([]);
@@ -70,4 +70,6 @@ const page: React.FC = () => {
     </div>
   );
 };
-export default page;
+
+export default Page;
+

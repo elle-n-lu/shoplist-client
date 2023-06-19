@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 interface pageProps {}
-const page: React.FC<pageProps> = () => {
+const Page: React.FC<pageProps> = () => {
   const router = useRouter();
   let token: string;
   if (typeof window !== "undefined") {
@@ -95,4 +95,4 @@ const page: React.FC<pageProps> = () => {
     </div>
   );
 };
-export default page;
+export default Page
