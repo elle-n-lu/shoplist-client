@@ -1,6 +1,7 @@
 "use client";
 import axios from "axios";
 import Link from "next/link";
+import { ToastContainer, toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { base_api } from "../base_api/base_api";
@@ -9,7 +10,7 @@ const Page: React.FC<pageProps> = () => {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const notify = (message: string) => toast(message);
   const submitForm = async (e: any) => {
     e.preventDefault();
     const formData = new FormData();
@@ -17,20 +18,21 @@ const Page: React.FC<pageProps> = () => {
     formData.append("password", password);
 
     const res = await axios
-      .post(
-        base_api+"login/",formData,
-        { withCredentials: true }
-      )
-      .then(async (res) => {
+      .post(base_api + "login/", formData, { withCredentials: true })
+     
+     if(res){
         window.localStorage.setItem("access", res.data.token);
         window.localStorage.setItem("user", res.data.user);
         router.push("/");
-      })
-      .catch((error) => console.log(error.response.data[0]));
+     }else{
+      console.log(res)
+     }
   };
 
   return (
     <section className="bg-gray-50 ">
+      <ToastContainer />
+
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <Link
           href="/"
@@ -101,4 +103,4 @@ const Page: React.FC<pageProps> = () => {
     </section>
   );
 };
-export default Page
+export default Page;
