@@ -3,6 +3,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { base_api } from "../base_api/base_api";
 interface pageProps {}
 const Page: React.FC<pageProps> = () => {
   const router = useRouter();
@@ -21,7 +22,7 @@ const Page: React.FC<pageProps> = () => {
     formData.append("budget", budget);
     formData.append("uploadfile", file);
     await axios
-      .post("http://127.0.0.1:5000/files/upload", formData, {
+      .post(base_api+"files/upload", formData, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => router.push('/'))

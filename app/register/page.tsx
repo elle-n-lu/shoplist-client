@@ -3,6 +3,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { base_api } from "../base_api/base_api";
 interface pageProps {}
 const Page: React.FC<pageProps> = () => {
     const [username, setUsername] = useState('')
@@ -16,7 +17,7 @@ const Page: React.FC<pageProps> = () => {
         formData.append("email", email);
         formData.append("password", password);
         await axios
-          .post("http://127.0.0.1:5000/registe", formData, { withCredentials: true })
+          .post(base_api+"registe", formData, { withCredentials: true })
           .then((res) => router.push('/signin'))
           .catch((error) => console.log('error.response.data[0]'));
       };

@@ -6,6 +6,7 @@ import { tablesProps } from "./upload/tables";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { base_api } from "./base_api/base_api";
 import "react-toastify/dist/ReactToastify.css";
 const Home = () => {
   const router = useRouter();
@@ -20,7 +21,7 @@ const Home = () => {
   };
   const clickget = async () => {
     await axios
-      .get("http://127.0.0.1:5000/files/", {
+      .get(base_api+"files/", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
