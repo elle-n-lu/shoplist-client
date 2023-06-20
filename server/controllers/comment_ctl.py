@@ -33,9 +33,9 @@ def create_comment(id):
     uploadfile=Uploadfile.query.filter_by(id=id).first()
     if user:
         if uploadfile:
-            comment_info=CommentSchema().load(request.json)
+            
             new_comment=Comment(
-                message=comment_info['message'],
+                message=request.form['message'],
                 user_id=user.id,
                 uploadfile_id=id
             )
