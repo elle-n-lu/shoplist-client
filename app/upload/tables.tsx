@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React, { useCallback, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { plans } from "../plans/page";
+import { base_api } from "../base_api/base_api";
 
 export interface tablesProps {
   id: number;
@@ -31,7 +32,7 @@ const Tables: React.FC<tablesProps> = ({
     typeof window !== "undefined" && (localStorage.getItem("access") as string);
   const deleteOp = async (id: number) => {
     await axios
-      .delete("http://127.0.0.1:5000/files/delete/" + id, {
+      .delete(base_api+"files/delete/" + id+'/', {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) =>{changeMessage('added'); window.location.reload()})

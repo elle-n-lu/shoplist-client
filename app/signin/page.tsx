@@ -10,7 +10,7 @@ const Page: React.FC<pageProps> = () => {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const notify = (message: string) => toast(message);
+  const [message, setMessage] = useState<string | undefined>();
   const submitForm = async (e: any) => {
     e.preventDefault();
     const formData = new FormData();
@@ -19,14 +19,12 @@ const Page: React.FC<pageProps> = () => {
 
     const res = await axios
       .post(base_api + "login/", formData, { withCredentials: true })
-     
-     if(res){
+      .then(async (res) => {
         window.localStorage.setItem("access", res.data.token);
         window.localStorage.setItem("user", res.data.user);
         router.push("/");
-     }else{
-      console.log(res)
-     }
+      })
+      .catch((error) => {console.log(error.response.data.error); setMessage(error.response.data.error)});
   };
 
   return (
@@ -50,6 +48,7 @@ const Page: React.FC<pageProps> = () => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
               Sign in to your account
             </h1>
+            {message && <label className=" text-red-500">{message}</label>}
             <form className="space-y-4 md:space-y-6" onSubmit={submitForm}>
               <div>
                 <label className="block mb-2 text-sm font-medium text-gray-900 ">
@@ -57,12 +56,13 @@ const Page: React.FC<pageProps> = () => {
                 </label>
                 <input
                   value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  type="usernameOrEmail"
-                  name="usernameOrEmail"
-                  id="username"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
-                  placeholder="username or name@company.com"
+                  onChange={(e) => {setMessage(undefined);setUsername(e.target.value)}}
+                  type="email"
+                  name="email"
+                  id="email"
+                  className=" bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                  style={{borderColor: message? "red":" gray "}}
+                  placeholder="name@company.com"
                   required
                 />
               </div>
@@ -76,6 +76,7 @@ const Page: React.FC<pageProps> = () => {
                   type="password"
                   name="password"
                   id="password"
+                  style={{borderColor: message? "red":" gray "}}
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
                   required
