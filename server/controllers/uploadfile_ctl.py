@@ -1,6 +1,9 @@
 import os
 from flask import Blueprint, jsonify,request
 from pkg_init import db, bcrypt, UPLOAD_FOLDER
+from sqlalchemy import select
+from sqlalchemy import text
+from sqlalchemy.orm import aliased
 from flask_jwt_extended import get_jwt_identity,jwt_required
 from werkzeug.utils import secure_filename
 from models.uploadfiles import Uploadfile, UploadfileSchema
@@ -22,8 +25,8 @@ def get_files():
     user_id=get_jwt_identity()
     user = User.query.filter_by(id=user_id).first()
     if user:
-        files=Uploadfile.query.all()
-        res=UploadfileSchema(many=True).dump(files)
+        stmt=Uploadfile.query.filter_by(user_id = user_id)
+        res=UploadfileSchema(many=True).dump(stmt)
         return jsonify(res)
     else:
         return {"error":"login required"}, 401
@@ -56,7 +59,7 @@ def upload_files():
                     budget=budget,
                     file_name=file_name,
                     file=file.read(),
-                    user_id=1
+                    user_id=user_id
                 )
                 db.session.add(newfile)
                 db.session.commit()

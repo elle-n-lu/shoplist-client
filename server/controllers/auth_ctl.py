@@ -14,6 +14,12 @@ def admin_required():
     if not (user and user.admin):
         abort(401)
 
+def admin_or_owner_required(owner_id):
+    user_id = get_jwt_identity()
+    stmt = db.select(User).filter_by(id=user_id)
+    user=db.session.scalar(stmt)
+    if not (user and (user.admin or user_id==owner_id)):
+        abort(401)
 
 @app_auth.route("/users",methods=['GET'])
 def get_users():
@@ -38,6 +44,8 @@ def registe_users():
         return UserSchema(exclude=['password']).dump(user), 201
     except exc.IntegrityError:
         return {'error':'email already exist'},409
+    except KeyError:
+        return {'error':'missing data required'}
 
 @app_auth.route("/login/",methods=['POST'])
 def login_users():   
@@ -53,7 +61,7 @@ def login_users():
         
         expire=timedelta(days=1)
         access_token=create_access_token(identity=user.id,expires_delta=expire)
-        return {"user":user.username, "token":access_token}
+        return {"user":user.username,"id":user.id, "token":access_token}
     except KeyError:
         return {"error":"email and password are required"}, 400
    

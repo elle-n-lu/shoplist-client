@@ -33,7 +33,6 @@ def create_comment(id):
     uploadfile=Uploadfile.query.filter_by(id=id).first()
     if user:
         if uploadfile:
-            
             new_comment=Comment(
                 message=request.form['message'],
                 user_id=user.id,
