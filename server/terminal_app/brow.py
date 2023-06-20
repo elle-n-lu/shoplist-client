@@ -90,9 +90,9 @@ class brow:
         self.driver.close()
     
 
-cc=brow('milk')
-cm=cc.get_title_price()
-print('cc',cm)
+# cc=brow('milk')
+# cm=cc.get_title_price()
+# print('cc',cm)
     
 
 
