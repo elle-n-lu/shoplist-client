@@ -29,6 +29,8 @@ use selenium to accumulate user browsing activity and beutifulsoup to extract se
     python3 -m venv .venv
     python3 -m pip install -r requirements.txt
     . .venv/bin/activate
+    add your own DATABASE_URL & SECRET_KEY
+    flask db create && flask db seed
     flask run
 
 3. client setup
