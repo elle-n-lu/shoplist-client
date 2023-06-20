@@ -20,7 +20,6 @@ const Page: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [plans, setPlans] = useState<plans[]>([]);
-  const [comments, setComments] = useState<any>([{"message":"not bad","user":"ming"}]);
 
   useEffect(() => {
     if (searchParams) {
@@ -47,15 +46,6 @@ const Page: React.FC = () => {
           View all
         </a>
         <div className="flex items-center">
-          {/* {comments &&
-            comments.map((comment: any) => (
-              <div className="flex mb-2 ">
-                <label className="font-semibold text-gray-500 ">
-                  {comment.user}
-                </label>
-                <p className="text-gray-400"> :{comment.message}</p>
-              </div>
-            ))} */}
           <input
             type="text"
             className="bg-gray-50 p-2 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500"

@@ -1,34 +1,55 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![flask](https://img.shields.io/badge/flask-%2320232a.svg?style=for-the-badge&logo=flask&logoColor=%2321FABB)
+![postgres](https://img.shields.io/badge/postgresql-%2320232a.svg?style=for-the-badge&logo=postgresQL&logoColor=%232SAD2)
+![react](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 
-## Getting Started
+[Web Link](https://shop-plan.netlify.app/)
 
-First, run the development server:
+## § Shoplsit Flask API Postman Documentation
+[API Documentation](https://documenter.getpostman.com/view/19703585/2s93sjVpDe)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## § Terminal App Features
+1. user input budget and provide shoplist txt file 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. According to user input, simulate the product list data retrieving online
+use selenium to accumulate user browsing activity and beutifulsoup to extract searching data needed
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Analyzing searching data and comparing with product keywords and budget, save results in file
+* calculate total price of each possible combinations
+* match keywords and budget in the shoplist provided in first step, get the final matched results and show results in terminal or saved in local csv file for user to check 
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## § App instructions
 
-## Learn More
+1. git clone 'repo link'
 
-To learn more about Next.js, take a look at the following resources:
+2. move server folder outside shopplans folder
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. server setup
+> cd server
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+    python3 -m venv .venv
+    python3 -m pip install -r requirements.txt
+    . .venv/bin/activate
+    flask run
 
-## Deploy on Vercel
+3. client setup
+> cd shopplans
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    replace api url in app/base_api/base_api.ts
+    yarn
+    yarn dev
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## § App Interface Screenshot
+
+*program in development mode
+<img src='./docs/sign-up.png' />
+<img src='./docs/login.png' />
+<img src='./docs/login-error.png' />
+<img src='./docs/order-list.png' />
+<img src='./docs/plan-list.png' />
+<img src='./docs/toast-notify.png' />
+<img src='./docs/upload-form.png' />
+
+
+
+
+
